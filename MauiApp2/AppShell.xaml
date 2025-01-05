@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:MauiApp2"
+       x:Class="MauiApp2.AppShell">
+
+	<Shell.ItemTemplate>
+		<DataTemplate>
+			<Grid Padding="15" ColumnDefinitions="40,*">
+				
+				<Image Source="{Binding Icon}"
+                       HeightRequest="25" WidthRequest="25" VerticalOptions="Center" Grid.Column="0" />
+
+				<Label Text="{Binding Title}" FontSize="21" VerticalOptions="Center" Grid.Column="1" />
+			</Grid>
+		</DataTemplate>
+	</Shell.ItemTemplate>
+
+
+	<FlyoutItem Title="Ana Sayfa" Route="MainPage" Icon="menu.png">
+		<ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+	</FlyoutItem>
+	<FlyoutItem Title="Kurlar" Route="Kurlar" Icon="money.png">
+		<ShellContent ContentTemplate="{DataTemplate local:Kurlar}" />
+	</FlyoutItem>
+	<FlyoutItem Title="Haberler" Route="Haberler" Icon="news.png">
+		<ShellContent ContentTemplate="{DataTemplate local:Haberler}" />
+	</FlyoutItem>
+	<FlyoutItem Title="Hava Durumu" Route="HavaDurumu" Icon="hava.png">
+		<ShellContent ContentTemplate="{DataTemplate local:HavaDurumu}" />
+	</FlyoutItem>
+	<FlyoutItem Title="Yapılacaklar" Route="Yapilacaklar" Icon="todo.png">
+		<ShellContent ContentTemplate="{DataTemplate local:Yapilacaklar}" />
+	</FlyoutItem>
+	<FlyoutItem Title="Ayarlar" Route="Ayarlar" Icon="ayar.png">
+		<ShellContent ContentTemplate="{DataTemplate local:Ayarlar}" />
+	</FlyoutItem>
+	
+	<MenuItem Text="Çıkış Yap" 
+			  Clicked="OnLogOutClicked" 
+			  IconImageSource="logout.png"
+			  />
+</Shell>

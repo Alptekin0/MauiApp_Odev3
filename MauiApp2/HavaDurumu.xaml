@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.HavaDurumu"
+             Title="Hava Durumu">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="add.png" Order="Primary" Clicked="add_sehir"/>
+        <ToolbarItem IconImageSource="refresh.png" Order="Primary" Clicked="refresh_data" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Padding="10" Spacing="10">
+
+        <Entry x:Name="SehirEntry"
+               Placeholder="Şehir adı giriniz" 
+               Completed="AddSehir_Completed"
+               ReturnType="Done"
+               Keyboard="Default" />
+
+        <CollectionView ItemsSource="{Binding Sehirler}"
+                        SelectionMode="None"
+                        Margin="0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="5" HasShadow="True">
+                        <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto" VerticalOptions="Center">
+
+                            <Image Grid.Row="1" Grid.Column="0" Source="havadurumu.png" WidthRequest="100" HeightRequest="100" />
+
+                            <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" Padding="10,0">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium"    />
+                            </StackLayout>
+
+                            <ImageButton Grid.Row="0" Grid.Column="2" Source="cop.png" 
+                                         CommandParameter="{Binding Name}" 
+                                         Clicked="Sil" 
+                                         WidthRequest="30" 
+                                         HeightRequest="30" 
+                                         VerticalOptions="Center" 
+                                         HorizontalOptions="End"
+                                         />
+
+                            <WebView Grid.Row="1"
+                                     Grid.Column="1"
+                                     Source="{Binding Source}" 
+                                     WidthRequest="250"
+                                     HeightRequest="80"  
+                                     Scale="1.25" 
+                                     VerticalOptions="Center" 
+                                     HorizontalOptions="Center"
+                                     />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

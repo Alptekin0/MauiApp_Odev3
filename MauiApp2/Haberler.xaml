@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MauiApp2.Haberler"
+    Title="Haberler">
+
+	<ContentPage.Background>
+		<LinearGradientBrush EndPoint="0,1">
+			<GradientStop Color="#F0F4FD" Offset="0.0" />
+			<GradientStop Color="#FFFFFF" Offset="1.0" />
+		</LinearGradientBrush>
+	</ContentPage.Background>
+
+	<ContentPage.ToolbarItems>
+		<ToolbarItem IconImageSource="refresh.png" 
+                     Text="Yenile" 
+                     Order="Primary" 
+                     Clicked="ToolbarItem_Clicked"/>
+	</ContentPage.ToolbarItems>
+
+	<Grid RowDefinitions="Auto,*" Padding="10">
+
+		<CollectionView x:Name="category"
+                       Grid.Row="0"
+                       SelectionMode="Single"
+                       SelectionChanged="Category_SelectionChanged"
+                       ItemsUpdatingScrollMode="KeepScrollOffset">
+			<CollectionView.ItemsLayout>
+				<LinearItemsLayout Orientation="Horizontal"
+                                   ItemSpacing="10"/>
+			</CollectionView.ItemsLayout>
+
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<Frame Padding="8"
+                           Margin="0,5"
+                           HasShadow="True"
+                           BackgroundColor="White">
+						<Label Text="{Binding Baslik}"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               TextColor="#333" />
+					</Frame>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+		
+		<CollectionView x:Name="lsHaberler"
+                       Grid.Row="1"
+                       SelectionMode="Single"
+                       SelectionChanged="LsHaberler_SelectionChanged"
+                       ItemsUpdatingScrollMode="KeepScrollOffset">
+			<CollectionView.ItemsLayout>
+				<LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="15"/>
+			</CollectionView.ItemsLayout>
+
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<Frame CornerRadius="15"
+                           HasShadow="True"
+                           BackgroundColor="White"
+                           Padding="0" 
+                           Margin="5,0">
+						<VerticalStackLayout Spacing="8">
+
+							<Image Source="{Binding Enclosure.Link}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="300"
+								   WidthRequest="600"
+                                   HorizontalOptions="FillAndExpand"
+                                   Margin="0,0,0,6"/>
+
+							<VerticalStackLayout Padding="10">
+
+								<Label Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       FontSize="17"
+                                       TextColor="#222" />
+
+								<HorizontalStackLayout Spacing="5">
+									<Label Text="{Binding Author}" 
+                                           TextColor="#666"
+                                           FontSize="13" />
+									<Label Text=" | " 
+                                           TextColor="#666"
+                                           FontSize="13" />
+									<Label Text="{Binding PubDate}"
+                                           TextColor="#666"
+                                           FontSize="13" />
+								</HorizontalStackLayout>
+							</VerticalStackLayout>
+						</VerticalStackLayout>
+					</Frame>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+	</Grid>
+</ContentPage>

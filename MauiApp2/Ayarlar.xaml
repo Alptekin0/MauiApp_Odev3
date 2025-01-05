@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.Ayarlar"
+             Title="Ayarlar">
+	<Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+		<StackLayout Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
+			<Label Text="Koyu Tema" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+			<Switch x:Name="ThemeSwitch" Toggled="OnThemeToggled" />
+		</StackLayout>
+	</Grid>
+</ContentPage>

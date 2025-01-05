@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             x:Class="MauiApp2.Yapilacaklar"
+             Title="Yapılacaklar">
+
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Yeni Görev Ekle"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#0B2447"
+                   HorizontalOptions="Center" />
+
+            <VerticalStackLayout Spacing="10">
+                <Entry x:Name="GorevGirdisi"
+                       Placeholder="Görevi yazın..."
+                       BackgroundColor="White"
+                       WidthRequest="400"
+                       MaxLength="100"
+                       HorizontalOptions="FillAndExpand" 
+                       Completed="GorevGirdisi_Completed"/>
+                <DatePicker x:Name="GorevTarihi"
+                            Format="dd.MM.yyyy"
+                            MinimumDate="{x:Static system:DateTime.Now}"
+                            WidthRequest="100"
+                            HorizontalOptions="Start"
+                            />
+                <Button Text="Görev Ekle"
+                        BackgroundColor="#0B2447"
+                        TextColor="White"
+                        Clicked="EkleButonu_Clicked"
+                        WidthRequest="250"
+                        HeightRequest="50"/>
+            </VerticalStackLayout>
+
+            <Label Text="Görev Listesi"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#0B2447"
+                   HorizontalOptions="Start"
+                   
+                   />
+
+            <ScrollView>
+                <CollectionView x:Name="GorevListesi"
+                                ItemsSource="{Binding Gorevler}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10" Orientation="Horizontal" Spacing="15">
+                                <CheckBox IsChecked="{Binding Tamamlandi}"
+                                          VerticalOptions="Center"
+                                          CheckedChanged="CheckBox_CheckedChanged"   />
+                                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Baslik}"
+                                           FontSize="18"
+                                           TextColor="#0B2447"
+                                           FontAttributes="Bold" />
+                                    <Label Text="{Binding Tarih, StringFormat='Tarih: {0:dd.MM.yyyy}'}"
+                                           FontSize="14"
+                                           TextColor="#6B7280" />  
+                                </StackLayout>
+                                <Button Text="Sil"
+                                        BackgroundColor="Red"
+                                        TextColor="White"
+                                        Clicked="SilButonu_Clicked"
+                                        CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate> 
+                </CollectionView>
+            </ScrollView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp2"
+             x:Class="MauiApp2.Kurlar"
+             Title="Kurlar"
+             BackgroundColor="#f3f4f6">
+
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Yenile" Order="Primary" IconImageSource="refresh.png" Clicked="Button_Clicked"/>
+	</ContentPage.ToolbarItems>
+
+	<ContentPage.Resources>
+		
+		<Color x:Key="PrimaryColor">#4A90E2</Color>
+		<Color x:Key="SecondaryColor">#50E3C2</Color>
+		<Color x:Key="AccentColor">#F5A623</Color>
+		<Color x:Key="TextPrimary">#333333</Color>
+		<Color x:Key="TextSecondary">#777777</Color>
+
+		
+		<OnPlatform x:Key="TitleFontSize" x:TypeArguments="x:Double">
+			<On Platform="iOS, Android" Value="20" />
+			<On Platform="WinUI" Value="24" />
+		</OnPlatform>
+		<OnPlatform x:Key="HeaderFontSize" x:TypeArguments="x:Double">
+			<On Platform="iOS, Android" Value="16" />
+			<On Platform="WinUI" Value="18" />
+		</OnPlatform>
+		
+		<Style TargetType="Label" x:Key="HeaderLabel">
+			<Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+			<Setter Property="FontAttributes" Value="Bold" />
+			<Setter Property="FontSize" Value="{StaticResource HeaderFontSize}" />
+		</Style>
+		<Style TargetType="Label" x:Key="CurrencyNameLabel">
+			<Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+			<Setter Property="FontAttributes" Value="Bold" />
+			<Setter Property="FontSize" Value="16" />
+		</Style>
+		<Style TargetType="Label" x:Key="CurrencyValueLabel">
+			<Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+			<Setter Property="FontSize" Value="14" />
+		</Style>
+	</ContentPage.Resources>
+
+	<Grid RowDefinitions="Auto,Auto,*,Auto" Padding="10">
+		<Frame Grid.Row="0" BackgroundColor="Black" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+			<Label Text="Anlık Döviz Değerleri" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center"
+                   TextColor="White" 
+                   FontSize="24" 
+                   FontAttributes="Bold" />
+		</Frame>
+		
+		<SearchBar Grid.Row="1"
+                   Placeholder="Döviz İsmi Ara..."
+                   x:Name="CurrencySearchBar"
+                   TextChanged="CurrencySearchBar_TextChanged"
+                   SearchButtonPressed="CurrencySearchBar_SearchButtonPressed"
+                   CancelButtonColor="{StaticResource AccentColor}"
+                   Margin="0,0,0,10"
+                   
+                   />
+
+		<CollectionView Grid.Row="2" x:Name="Sepet" 
+                        ItemsSource="{Binding FilteredDovizList}"
+                        SelectionMode="None">
+			<CollectionView.ItemTemplate >
+				<DataTemplate>
+					<Frame CornerRadius="10" 
+                           BackgroundColor="White" 
+                           Margin="5"
+                           Padding="15">
+						<Grid ColumnDefinitions="Auto,*,Auto,Auto" RowDefinitions="Auto,Auto">
+							<Image Source="{Binding Icon}" 
+                                   WidthRequest="40" 
+                                   HeightRequest="40" 
+                                   VerticalOptions="Start" 
+                                   />
+
+							<StackLayout Grid.Column="1" 
+                                         Spacing="5" 
+                                         VerticalOptions="Center">
+								<Label Text="{Binding doviz_adi}" 
+                                       Style="{StaticResource CurrencyNameLabel}" />
+								<StackLayout Orientation="Horizontal" 
+                                             Spacing="10">
+									<Label Text="Alış:" 
+                                           Style="{StaticResource CurrencyValueLabel}" />
+									<Label Text="{Binding doviz_alis}" 
+                                           Style="{StaticResource CurrencyValueLabel}" />
+								</StackLayout>
+								<StackLayout Orientation="Horizontal" 
+                                             Spacing="10">
+									<Label Text="Satış:" 
+                                           Style="{StaticResource CurrencyValueLabel}" />
+									<Label Text="{Binding doviz_satis}" 
+                                           Style="{StaticResource CurrencyValueLabel}" 
+                                           />
+								</StackLayout>
+							</StackLayout>
+
+							<Label Grid.Column="2" 
+                                   Text="{Binding Fark}" 
+                                   TextColor="{Binding FarkColor}" 
+                                   FontAttributes="Bold" 
+                                   HorizontalOptions="End" 
+                                   VerticalOptions="Start" 
+                                   />
+							
+							<Image Grid.Column="3" 
+                                   Source="{Binding Yon}" 
+                                   WidthRequest="20" 
+                                   HeightRequest="20" 
+                                   VerticalOptions="End" />
+						</Grid>
+					</Frame>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+		<Label Grid.Row="3" 
+               Text="{Binding UpdateDate}" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" 
+               TextColor="{StaticResource TextSecondary}" 
+               FontSize="12" 
+               Margin="10" 
+               
+               />
+	</Grid>
+</ContentPage>

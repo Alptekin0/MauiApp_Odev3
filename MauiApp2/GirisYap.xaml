@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MauiApp2.GirisYap"
+    Title="Giriş Yap"
+    BackgroundColor="#FFFFFF">
+
+	<VerticalStackLayout Padding="30" Spacing="20"
+                         VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand">
+
+		<Label Text="Giriş Yap"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+		<Entry x:Name="entryEmail" 
+               Placeholder="Email"
+               Keyboard="Email"
+               WidthRequest="250"
+               TextColor="Black"
+               TextTransform="None"
+               IsSpellCheckEnabled="False"
+               IsTextPredictionEnabled="False" />   
+
+		<Entry x:Name="entryPassword"
+               Placeholder="Şifre"
+               IsPassword="True"
+               WidthRequest="250"
+               TextColor="Black" />
+
+		<Button Text="Giriş Yap"
+                BackgroundColor="Black"
+                TextColor="White"
+                Clicked="BtnGirisYap_Clicked"
+                WidthRequest="250"/>
+
+		<HorizontalStackLayout HorizontalOptions="Center" Padding="30">
+			<Label Text="Hesabın yok mu?"
+                    TextColor="Blue" 
+				    TextDecorations="Underline">
+				    
+				<Label.GestureRecognizers>
+					<TapGestureRecognizer Tapped="BtnKaydol_Clicked" />
+				</Label.GestureRecognizers>
+			</Label>
+		</HorizontalStackLayout>
+
+	</VerticalStackLayout>
+</ContentPage>
